@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Message;
 
 class MessagesController extends Controller
 {
@@ -16,6 +17,21 @@ class MessagesController extends Controller
     		'name' => 'required',
 		    'email' => 'required'
 	    ] );
-    	return 'success';
+
+    	// Only the validation is successful below line of code will be executed to add the data to messages table.
+	    $message = new Message;
+	    $message->name = $request->input(  'name');
+	    $message->email = $request->input(  'email');
+	    $message->message = $request->input(  'message');
+
+	    // Save the message into database.
+	    $message->save();
+
+	    /**
+	     * Once its saved to database redirect to homepage,
+	     * with( 'success', 'Message Sent' ) will make session( 'success' ) with a value 'Message Sent' available
+	     * in home page where it is being redirected to.
+	     */
+	    return redirect( url( '/' ) )->with( 'success', 'Message Sent' );
     }
 }
