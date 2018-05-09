@@ -34,4 +34,14 @@ class MessagesController extends Controller
 	     */
 	    return redirect( url( '/' ) )->with( 'success', 'Message Sent' );
     }
+
+	/**
+	 * This function is called when the user lands to base_url/messages
+	 */
+    function get_messages() {
+    	// Gets all the data from the 'messages' table and passes to views/messages/blade.php in $messages variable.
+//    	$messages = \App\Message::all(); or,
+	    $messages = Message::all();
+		return view( 'messages', compact( 'messages' ) );
+    }
 }

@@ -10,6 +10,8 @@
 </head>
 <body>
 @include( 'inc.navbar' )
+<br>
+<br>
 <div class="container">
     @if( Request::is( '/' ) )
         @include( 'inc.showcase' )
